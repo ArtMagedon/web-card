@@ -1,0 +1,14 @@
+services:
+  web-card:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: web-card:latest
+    container_name: web-card
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
