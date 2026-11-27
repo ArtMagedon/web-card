@@ -7,8 +7,14 @@ services:
     container_name: web-card
     restart: unless-stopped
     ports:
-      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:8081:8080"
     security_opt:
       - no-new-privileges:true
     cap_drop:
       - ALL
+    # Nginx entrypoint chowns its cache directories; the master process
+    # also drops worker privileges to the nginx user.
+    cap_add:
+      - CHOWN
+      - SETUID
+      - SETGID
